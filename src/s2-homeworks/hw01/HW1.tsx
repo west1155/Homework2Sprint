@@ -26,16 +26,14 @@ export type MessageType = {
     }
 }
 
-
-// структуру объекта не менять
 export const message0: MessageType = {
     id: 0,
     user: {
-        avatar: avatar, // можно менять
-        name: 'Some Name',  // можно менять
+        avatar: avatar,
+        name: 'Ivan',  // можно менять
     },
     message: {
-        text: 'some textsome textsome textsome textsome textsome textsome text', // можно менять
+        text: 'Hello, how are you, what did you do yesterday?', // можно менять
         time: '22:00', // можно менять
     },
 }
