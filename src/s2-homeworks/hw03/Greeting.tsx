@@ -26,30 +26,32 @@ const Greeting: React.FC<GreetingPropsType> = (
         lastUserName,
     }
 ) => {
-    const inputClass = error ? s.errorInput : s.input
     return (
-        <div className={s.greetingForm}>
-            <span className={s.totalUser}>total users: {totalUsers}</span>
-            <div className={s.inputAndButtonContainer}>
-                <input value={name}
-                       onChange={setNameCallback}
-                       className={error? s.errorInput : s.input}
-                       onBlur={onBlur}
-                       onKeyDown={onEnter}
+            <div id={'hw3-form'} className={s.greetingForm}>
+                <span id={'hw3-users-total'} className={s.totalUser}>total users: {totalUsers}</span>
+                <div className={s.inputAndButtonContainer}>
+                    <input
+                        id={'hw3-input'}
+                        value={name}
+                           onChange={setNameCallback}
+                           className={error ? s.errorInput : s.input}
+                           onBlur={onBlur}
+                           onKeyDown={onEnter}
 
-                />
-                <Button
-                    style={{ marginLeft: '12px' }}
-                    variant="contained"
-                    className={s.button}
-                    disabled={error.trim() !== '' || name.trim() === ''}
-                    onClick={addUser}>
-                    add
-                </Button>
+                    />
+                    <Button
+                        id={'hw3-button'}
+                        style={{marginLeft: '12px'}}
+                        variant="contained"
+                        className={s.button}
+                        disabled={error.trim() !== '' || name.trim() === ''}
+                        onClick={addUser}>
+                        add
+                    </Button>
+                </div>
+                {error.trim() !== '' ? <span id={'hw3-error'} className={s.error}>{error}</span> :
+                    totalUsers > 0 && <span id={'hw3-last-user'} className={s.name}>Привет: {lastUserName}</span>}
             </div>
-            {error.trim() !== '' ? <span className={s.error}>{error}</span> :
-                totalUsers > 0 && <span className={s.name}>Привет: {lastUserName}</span>}
-        </div>
     )
 }
 
