@@ -1,13 +1,13 @@
-import React, {KeyboardEvent} from 'react'
+import React, {ChangeEvent, KeyboardEvent} from 'react'
 import s from './Greeting.module.css'
 import {Button} from "@mui/material";
 
 type GreetingPropsType = {
     name: string
-    setNameCallback: any
-    addUser: () => void
-    onBlur: () => void
-    onEnter: (e: KeyboardEvent<HTMLInputElement>) => void
+    setNameCallback: (e:ChangeEvent<HTMLInputElement>)=>void //
+    addUser: ()=> void
+    onBlur: ()=> void
+    onEnter: (e: KeyboardEvent<HTMLInputElement>)=> void
     error: string
     totalUsers: number
     lastUserName?: string
@@ -26,32 +26,47 @@ const Greeting: React.FC<GreetingPropsType> = (
         lastUserName,
     }
 ) => {
+    const inputClass = error? s.errorInput : '' // need to fix with (?:)
     return (
-            <div id={'hw3-form'} className={s.greetingForm}>
-                <span id={'hw3-users-total'} className={s.totalUser}>total users: {totalUsers}</span>
-                <div className={s.inputAndButtonContainer}>
+        <div id={'hw3-form'} className={s.greetingForm}>
+            <div className={s.text}>
+                {'Людей добавили: '}
+                <span id={'hw3-users-total'}>
+                    {totalUsers}
+                </span>
+            </div>
+
+            <div className={s.inputAndButtonContainer}>
+                <div>
                     <input
                         id={'hw3-input'}
                         value={name}
-                           onChange={setNameCallback}
-                           className={error ? s.errorInput : s.input}
-                           onBlur={onBlur}
-                           onKeyDown={onEnter}
-
+                        onChange={setNameCallback}
+                        className={inputClass}
+                        onKeyDown={onEnter}
+                        onBlur={onBlur}
                     />
-                    <Button
-                        id={'hw3-button'}
-                        style={{marginLeft: '12px'}}
-                        variant="contained"
-                        className={s.button}
-                        disabled={error.trim() !== '' || name.trim() === ''}
-                        onClick={addUser}>
-                        add
-                    </Button>
+                    <div id={'hw3-error'} className={error && s.error}>
+                        {error}
+                    </div>
                 </div>
-                {error.trim() !== '' ? <span id={'hw3-error'} className={s.error}>{error}</span> :
-                    totalUsers > 0 && <span id={'hw3-last-user'} className={s.name}>Привет: {lastUserName}</span>}
+
+                <button
+                    id={'hw3-button'}
+                    onClick={addUser}
+                    className={s.button}
+                    disabled={!name}
+                >
+                    add
+                </button>
             </div>
+
+            {lastUserName && (
+                <div className={s.greeting}>
+                    Привет <span id={'hw3-last-user'}>{lastUserName}</span>!
+                </div>
+            )}
+        </div>
     )
 }
 
