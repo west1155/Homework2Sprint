@@ -1,8 +1,8 @@
-import React from 'react'
+import React, {Dispatch, SetStateAction} from 'react'
 import {pureOnBlur} from '../GreetingContainer'
 
-let name: any
-let error: any
+let name: string
+let error: string
 const setError = (a: any) => {
     error = a
 }
