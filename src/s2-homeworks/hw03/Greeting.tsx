@@ -1,6 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react'
 import s from './Greeting.module.css'
-import {Button} from "@mui/material";
 
 type GreetingPropsType = {
     name: string
@@ -13,7 +12,10 @@ type GreetingPropsType = {
     lastUserName?: string
 }
 
-// презентационная компонента (для верстальщика)
+// презентационная компонента (для верстальщика
+//
+//
+
 const Greeting: React.FC<GreetingPropsType> = (
     {
         name,
