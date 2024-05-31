@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {homeWorkReducer, StateType} from './bll/homeWorkReducer'
+import {homeWorkReducer} from './bll/homeWorkReducer'
 import s from './HW8.module.css'
 import s2 from '../../s1-main/App.module.css'
 import SuperButton from '../hw04/common/c2-SuperButton/SuperButton'
@@ -17,23 +17,22 @@ export type UserType = {
     age: number
 }
 
-const initialPeople: StateType = {
-    people: [
-        {_id: 0, name: 'Кот', age: 3},
-        {_id: 1, name: 'Александр', age: 66},
-        {_id: 2, name: 'Коля', age: 16},
-        {_id: 3, name: 'Виктор', age: 44},
-        {_id: 4, name: 'Дмитрий', age: 40},
-        {_id: 5, name: 'Ирина', age: 55},
-    ]
-}
+const initialPeople: UserType[] = [
+    // студенты могут поменять имя/возраст/количество объектов, _id должны быть целочисленные
+    {_id: 0, name: 'Вася', age: 3},
+    {_id: 1, name: 'Александр', age: 66},
+    {_id: 2, name: 'Коля', age: 16},
+    {_id: 3, name: 'Виктор', age: 44},
+    {_id: 4, name: 'Дмитрий', age: 40},
+    {_id: 5, name: 'Ирина', age: 55},
+]
 
 
 const HW8 = () => {
-    const [people, setPeople] = useState<StateType>(initialPeople)
+    const [people, setPeople] = useState<UserType[]>(initialPeople)
     const [currentSort, setCurrentSort] = useState('')
 
-    const finalPeople = people.people.map((u: UserType) => <User key={u._id} u={u}/>)
+    const finalPeople = people.map((u: UserType) => <User key={u._id} u={u}/>)
 
     const sortUp = () => {
         setPeople(
@@ -53,6 +52,7 @@ const HW8 = () => {
             homeWorkReducer(initialPeople, {type: 'check', payload: 18})
         ) // совершеннолетние
         setCurrentSort('18')
+        debugger
     }
 
     return (
